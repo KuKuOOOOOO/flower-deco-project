@@ -53,37 +53,37 @@ function PixelChrysanthemum({
     petalCount,
     petalDistance,
 }: {
-    hovered: boolean;
-    petalColor: string;
-    centerColor: string;
-    speed: number;
-    segmentCount: number;
-    segmentSpacing: number;
-    petalCount: number;
-    petalDistance: number;
+    hovered: boolean
+    petalColor: string
+    centerColor: string
+    speed: number
+    segmentCount: number
+    segmentSpacing: number
+    petalCount: number
+    petalDistance: number
 }) {
-    const group = React.useRef<THREE.Group>(null);
-    const centerRef = React.useRef<THREE.Mesh>(null);
+    const group = React.useRef<THREE.Group>(null)
+    const centerRef = React.useRef<THREE.Mesh>(null)
 
     useFrame(() => {
-        const elapsed = clock.getElapsedTime();
+        const elapsed = clock.getElapsedTime()
 
         if (group.current) {
-            group.current.rotation.y += hovered ? speed : speed / 5;
+            group.current.rotation.y += hovered ? speed : speed / 5
         }
 
         if (centerRef.current) {
-            const scale = 1.5 + 0.5 * Math.sin(elapsed * 3);
-            centerRef.current.scale.set(scale, scale, scale);
+            const scale = 1.5 + 0.5 * Math.sin(elapsed * 3)
+            centerRef.current.scale.set(scale, scale, scale)
         }
-    });
+    })
 
-    const petals = [];
+    const petals = []
 
     for (let i = 0; i < petalCount; i++) {
-        const angle = (i / petalCount) * Math.PI * 2;
-        const baseX = Math.cos(angle) * petalDistance;
-        const baseY = Math.sin(angle) * petalDistance;
+        const angle = (i / petalCount) * Math.PI * 2
+        const baseX = Math.cos(angle) * petalDistance
+        const baseY = Math.sin(angle) * petalDistance
 
         for (let j = 0; j < segmentCount; j++) {
             petals.push(
@@ -96,9 +96,9 @@ function PixelChrysanthemum({
                     ]}
                 >
                     <boxGeometry args={[0.4, 0.4, 0.4]} />
-                    <meshStandardMaterial color={petalColor} />
+                    <meshBasicMaterial color={petalColor} />
                 </mesh>
-            );
+            )
         }
     }
 
@@ -106,11 +106,11 @@ function PixelChrysanthemum({
         <group ref={group} position={[0, 0, 0]}>
             <mesh ref={centerRef}>
                 <boxGeometry args={[0.35, 0.35, 0.35]} />
-                <meshStandardMaterial color={centerColor} />
+                <meshBasicMaterial color={centerColor} />
             </mesh>
             {petals}
         </group>
-    );
+    )
 }
 
 /// 主元件
@@ -160,8 +160,8 @@ export function SingleCanvasBox(props: Props) {
                 style={{ width: "100%", height: "100%", background: "transparent" }}
                 gl={{ alpha: true }}
             >
-                <ambientLight intensity={0.5} />
-                <pointLight position={[5, 5, 5]} />
+                <ambientLight intensity={1.0} />
+                <pointLight position={[5, 5, 5]} intensity={2.0} />
                 <PixelChrysanthemum
                     hovered={hovered}
                     petalColor={props.petalColor}
