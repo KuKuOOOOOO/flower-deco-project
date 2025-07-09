@@ -157,7 +157,8 @@ export function SingleCanvasBox(props: Props) {
         >
             <Canvas
                 camera={{ position: [0, 0, 5], fov: 75 }}
-                style={{ width: "100%", height: "100%" }}
+                style={{ width: "100%", height: "100%", background: "transparent" }}
+                gl={{ alpha: true }}
             >
                 <ambientLight intensity={0.5} />
                 <pointLight position={[5, 5, 5]} />
