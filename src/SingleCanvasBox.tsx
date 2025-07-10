@@ -150,7 +150,7 @@ export function SingleCanvasBox(props: Props) {
 
     return (
         <div
-            style={{ width: props.size, height: props.size, overflow: "hidden", cursor: "pointer" }}
+            style={{ width: props.size, height: props.size, overflow: "hidden" }}
             onPointerEnter={() => setHovered(true)}
             onPointerLeave={() => setHovered(false)}
             onClick={emitParticles}
